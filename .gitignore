@@ -123,3 +123,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# Static Files gerado pelo comando python manage.py collectstatic --noinput para validar o css
+staticfiles

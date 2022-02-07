@@ -1,0 +1,83 @@
+{% load static %}
+{% load humanize %}
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Home Fabricantes</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+	<link rel="stylesheet" href="{% static 'assets/css/tabela.css' %}" />
+	<link rel="stylesheet" href="{% static 'assets/css/menu.css' %}" />
+	<link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
+</head>
+
+<body>
+	<div class="container">
+		<h1>Fabricantes</h1>
+
+		<nav id='menu'>
+			<input type='checkbox' id='responsive-menu' onclick='updatemenu()'>
+			<ul>
+				<li><a href={% url 'home' %}>Home</a></li>
+				<li><a href={% url 'home_fabricantes' %}>Fabricantes</a></li>
+				<li><a href={% url 'home_carros' %}>Carros</a></li>
+			</ul>
+		</nav>
+		<table class="tg">
+			<thead>
+				<tr>
+					<th class="tg-0lax">Nome do Fabricante</th>
+					<th class="tg-0lax">Ano de Fundação</th>
+				</tr>
+			</thead>
+			{% for fabricante in fabricantes %}
+			<tbody>
+				{% if fabricante.id|divisibleby:"2" %}
+				<tr>
+					<td class="tg-0lax">
+						<a href={% url 'update_fabricantes' fabricante.id %}>
+							{{ fabricante.nome }}
+						</a>
+					</td>
+					<td class="tg-0lax">
+						<a href={% url 'update_fabricantes' fabricante.id %}>
+							{{ fabricante.ano_fundacao }}
+						</a>
+					</td>
+				</tr>
+				{% else %}
+				<tr>
+					<td class="tg-dg7a">
+						<a href={% url 'update_fabricantes' fabricante.id %}>
+							{{ fabricante.nome }}
+						</a>
+					</td>
+					<td class="tg-dg7a">
+						<a href={% url 'update_fabricantes' fabricante.id %}>
+							{{ fabricante.ano_fundacao }}
+						</a>
+					</td>
+				</tr>
+				{% endif %}
+			</tbody>
+			{% endfor %}
+		</table>
+		{% include '_pagination.html' %}
+
+		<a class="btn btn-primary" href={% url 'cadastro_fabricantes' %}>Cadastrar Novo Fabricante</a></li>
+	</div>
+
+	<!-- Scripts -->
+	<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+	<script src="{% static 'assets/js/jquery.poptrox.min.js' %}"></script>
+	<script src="{% static 'assets/js/browser.min.js' %}"></script>
+	<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+	<script src="{% static 'assets/js/util.js' %}"></script>
+	<script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+{% load static %}
+{% load humanize %}
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Edição Fabricante</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+	<link rel="stylesheet" href="{% static 'assets/css/tabela.css' %}" />
+	<link rel="stylesheet" href="{% static 'assets/css/menu.css' %}" />
+	<link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}" />
+</head>
+
+<body>
+	<div class="container">
+		<h1>Fabricante</h1>
+
+		<nav id='menu'>
+			<input type='checkbox' id='responsive-menu' onclick='updatemenu()'>
+			<ul>
+				<li><a href={% url 'home' %}>Home</a></li>
+				<li><a href={% url 'home_fabricantes' %}>Fabricantes</a></li>
+				<li><a href={% url 'home_carros' %}>Carros</a></li>
+			</ul>
+		</nav>
+
+
+
+	</div>
+	<div class="container">
+		<div class="col-xl"></div>
+		<div class="col-xl-8">
+			<h2 class="my-3">Edição de Fabricantes</h2>
+
+			<form method="POST" action="#editar_fabricante">
+				{% csrf_token %}
+
+				{% for hidden_field in form.hidden_fields %}
+            {{ hidden_field }}
+            {% endfor %}
+
+            {% for visible_field in form.visible_fields %}
+                {{ visible_field|as_crispy_field }}
+            {% endfor %}
+
+				<input id="editar_fabricante" type="submit" class="btn btn-primary" value="Enviar">
+			</form>
+		</div>
+		<div class="col-xl"></div>
+	</div>
+
+	<!-- Scripts -->
+	<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+	<script src="{% static 'assets/js/jquery.poptrox.min.js' %}"></script>
+	<script src="{% static 'assets/js/browser.min.js' %}"></script>
+	<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
+	<script src="{% static 'assets/js/util.js' %}"></script>
+	<script src="{% static 'assets/js/main.js' %}"></script>
+</body>
+
+</html>
